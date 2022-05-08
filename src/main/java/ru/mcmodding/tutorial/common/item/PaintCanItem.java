@@ -9,6 +9,7 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import ru.mcmodding.tutorial.McModding;
+import ru.mcmodding.tutorial.common.handler.ModTab;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class PaintCanItem extends Item {
         setTextureName(McModding.MOD_ID + ":paint_can");
         setMaxStackSize(1);
         setHasSubtypes(true);
+        setCreativeTab(ModTab.INSTANCE);
     }
 
     @Override
