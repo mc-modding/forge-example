@@ -3,6 +3,7 @@ package ru.mcmodding.tutorial.common.item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.potion.Potion;
 import ru.mcmodding.tutorial.McModding;
+import ru.mcmodding.tutorial.common.handler.ModTab;
 
 public class CherryItem extends ItemFood {
     public CherryItem() {
@@ -10,5 +11,6 @@ public class CherryItem extends ItemFood {
         setUnlocalizedName("cherry");
         setTextureName(McModding.MOD_ID + ":cherry");
         setPotionEffect(Potion.moveSlowdown.id, 15, 2, 0.5F);
+        setCreativeTab(ModTab.INSTANCE);
     }
 }
