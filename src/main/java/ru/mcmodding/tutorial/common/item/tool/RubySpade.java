@@ -17,11 +17,11 @@ public class RubySpade extends ItemTool {
     );
 
     public RubySpade() {
-        super(1F, ModItems.RUBY_MATERIAL, HARVEST_BLOCKS);
+        super(1F, ModItems.RUBY_TOOL_MATERIAL, HARVEST_BLOCKS);
         setUnlocalizedName("ruby_spade");
         setTextureName(McModding.MOD_ID + ":ruby_spade");
         setCreativeTab(ModTab.INSTANCE);
 
-        setHarvestLevel("shovel", ModItems.RUBY_MATERIAL.getHarvestLevel());
+        setHarvestLevel("shovel", ModItems.RUBY_TOOL_MATERIAL.getHarvestLevel());
     }
 }

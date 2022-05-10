@@ -7,7 +7,7 @@ import ru.mcmodding.tutorial.common.handler.ModTab;
 
 public class RubyHoe extends ItemHoe {
     public RubyHoe() {
-        super(ModItems.RUBY_MATERIAL);
+        super(ModItems.RUBY_TOOL_MATERIAL);
         setUnlocalizedName("ruby_hoe");
         setTextureName(McModding.MOD_ID + ":ruby_hoe");
         setCreativeTab(ModTab.INSTANCE);

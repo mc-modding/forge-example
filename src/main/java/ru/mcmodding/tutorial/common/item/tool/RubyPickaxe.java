@@ -22,12 +22,12 @@ public class RubyPickaxe extends ItemTool {
     );
 
     public RubyPickaxe() {
-        super(2F, ModItems.RUBY_MATERIAL, HARVEST_BLOCKS);
+        super(2F, ModItems.RUBY_TOOL_MATERIAL, HARVEST_BLOCKS);
         setUnlocalizedName("ruby_pickaxe");
         setTextureName(McModding.MOD_ID + ":ruby_pickaxe");
         setCreativeTab(ModTab.INSTANCE);
 
-        setHarvestLevel("pickaxe", ModItems.RUBY_MATERIAL.getHarvestLevel());
+        setHarvestLevel("pickaxe", ModItems.RUBY_TOOL_MATERIAL.getHarvestLevel());
     }
 
     @Override

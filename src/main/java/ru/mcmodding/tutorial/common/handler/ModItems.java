@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
@@ -16,8 +17,10 @@ import ru.mcmodding.tutorial.common.item.tool.*;
 
 public class ModItems {
     /** Материалы **/
-    public static final Item.ToolMaterial RUBY_MATERIAL =
+    public static final Item.ToolMaterial RUBY_TOOL_MATERIAL =
             EnumHelper.addToolMaterial("mcmodding:ruby", 4, 1800, 16F, 5F, 30);
+    public static final ItemArmor.ArmorMaterial RUBY_ARMOR_MATERIAL =
+            EnumHelper.addArmorMaterial("mcmodding:ruby", 66, new int[]{5, 5, 5, 5}, 30);
 
     /** Предметы **/
     public static final RingItem RING = new RingItem();
@@ -34,7 +37,8 @@ public class ModItems {
     public static final RubyMultiTool RUBY_MULTI_TOOL = new RubyMultiTool();
 
     static {
-        RUBY_MATERIAL.setRepairItem(new ItemStack(RUBY));
+        RUBY_TOOL_MATERIAL.setRepairItem(new ItemStack(RUBY));
+        RUBY_ARMOR_MATERIAL.customCraftingMaterial = RUBY;
     }
 
     public static void register() {

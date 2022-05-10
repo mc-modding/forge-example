@@ -20,12 +20,12 @@ public class RubyMultiTool extends ItemTool {
     public static final Set<Block> HARVEST_BLOCKS = Sets.newHashSet();
 
     public RubyMultiTool() {
-        super(5F, ModItems.RUBY_MATERIAL, HARVEST_BLOCKS);
+        super(5F, ModItems.RUBY_TOOL_MATERIAL, HARVEST_BLOCKS);
         setUnlocalizedName("ruby_multi_tool");
         setTextureName(McModding.MOD_ID + ":ruby_multi_tool");
         setCreativeTab(ModTab.INSTANCE);
 
-        final int harvestLvl = ModItems.RUBY_MATERIAL.getHarvestLevel();
+        final int harvestLvl = ModItems.RUBY_TOOL_MATERIAL.getHarvestLevel();
         setHarvestLevel("axe", harvestLvl);
         setHarvestLevel("pickaxe", harvestLvl);
         setHarvestLevel("shovel", harvestLvl);

@@ -7,7 +7,7 @@ import ru.mcmodding.tutorial.common.handler.ModTab;
 
 public class RubySword extends ItemSword {
     public RubySword() {
-        super(ModItems.RUBY_MATERIAL);
+        super(ModItems.RUBY_TOOL_MATERIAL);
         setUnlocalizedName("ruby_sword");
         setTextureName(McModding.MOD_ID + ":ruby_sword");
         setCreativeTab(ModTab.INSTANCE);

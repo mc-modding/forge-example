@@ -18,12 +18,12 @@ public class RubyAxe extends ItemTool {
     );
 
     public RubyAxe() {
-        super(3F, ModItems.RUBY_MATERIAL, HARVEST_BLOCKS);
+        super(3F, ModItems.RUBY_TOOL_MATERIAL, HARVEST_BLOCKS);
         setUnlocalizedName("ruby_axe");
         setTextureName(McModding.MOD_ID + ":ruby_axe");
         setCreativeTab(ModTab.INSTANCE);
 
-        setHarvestLevel("axe", ModItems.RUBY_MATERIAL.getHarvestLevel());
+        setHarvestLevel("axe", ModItems.RUBY_TOOL_MATERIAL.getHarvestLevel());
     }
 
     @Override
