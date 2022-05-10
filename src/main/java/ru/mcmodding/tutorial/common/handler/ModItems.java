@@ -4,25 +4,28 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 import ru.mcmodding.tutorial.client.render.item.RingItemRender;
 import ru.mcmodding.tutorial.common.item.CherryItem;
 import ru.mcmodding.tutorial.common.item.PaintCanItem;
 import ru.mcmodding.tutorial.common.item.RingItem;
+import ru.mcmodding.tutorial.common.item.RubyItem;
 import ru.mcmodding.tutorial.common.item.tool.*;
 
 public class ModItems {
-    /** Materials **/
+    /** Материалы **/
     public static final Item.ToolMaterial RUBY_MATERIAL =
             EnumHelper.addToolMaterial("mcmodding:ruby", 4, 1800, 16F, 5F, 30);
 
-    /** Items **/
+    /** Предметы **/
     public static final RingItem RING = new RingItem();
     public static final PaintCanItem PAINT_CAN = new PaintCanItem();
     public static final CherryItem CHERRY = new CherryItem();
+    public static final RubyItem RUBY = new RubyItem();
 
-    /** Tools **/
+    /** Инструменты **/
     public static final RubyAxe RUBY_AXE = new RubyAxe();
     public static final RubyHoe RUBY_HOE = new RubyHoe();
     public static final RubyPickaxe RUBY_PICKAXE = new RubyPickaxe();
@@ -30,10 +33,15 @@ public class ModItems {
     public static final RubySword RUBY_SWORD = new RubySword();
     public static final RubyMultiTool RUBY_MULTI_TOOL = new RubyMultiTool();
 
+    static {
+        RUBY_MATERIAL.setRepairItem(new ItemStack(RUBY));
+    }
+
     public static void register() {
         GameRegistry.registerItem(RING, "ring");
         GameRegistry.registerItem(PAINT_CAN, "paint_can");
         GameRegistry.registerItem(CHERRY, "cherry");
+        GameRegistry.registerItem(RUBY, "ruby");
 
         GameRegistry.registerItem(RUBY_AXE, "ruby_axe");
         GameRegistry.registerItem(RUBY_HOE, "ruby_hoe");

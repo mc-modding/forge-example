@@ -3,6 +3,7 @@ itemGroup.mcmodding=McModding
 item.ring.name=Кольцо
 item.paint_can.name=Банка краски
 item.cherry.name=Черешня
+item.ruby.name=Рубин
 
 item.ruby_axe.name=Рубиновый топор
 item.ruby_hoe.name=Рубиновая мотыга
