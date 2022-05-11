@@ -14,6 +14,7 @@ import ru.mcmodding.tutorial.common.handler.ModTab;
 import java.util.List;
 
 public class PaintCanItem extends Item {
+
     @SideOnly(Side.CLIENT)
     private IIcon colorMask;
 
@@ -47,14 +48,15 @@ public class PaintCanItem extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack(ItemStack stack, int renderPass) {
-        return renderPass == 0 ? 16777215 : ItemDye.field_150922_c[stack.getItemDamage() % ItemDye.field_150922_c.length];
+        return renderPass == 0 ? 0xffffff : ItemDye.field_150922_c[stack.getItemDamage() % ItemDye.field_150922_c.length];
     }
 
     @Override
     @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unchecked")
     public void getSubItems(Item item, CreativeTabs tab, List items) {
-        for (int meta = 0, size = ItemDye.field_150922_c.length; meta < size; meta++) {
-            items.add(new ItemStack(item, 1, meta));
+        for (int damage = 0, size = ItemDye.field_150922_c.length; damage < size; damage++) {
+            items.add(new ItemStack(item, 1, damage));
         }
     }
 }

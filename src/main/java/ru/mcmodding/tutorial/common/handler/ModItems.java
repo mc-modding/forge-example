@@ -16,19 +16,20 @@ import ru.mcmodding.tutorial.common.item.RubyItem;
 import ru.mcmodding.tutorial.common.item.tool.*;
 
 public class ModItems {
-    /** Материалы **/
+
+    /* Материалы */
     public static final Item.ToolMaterial RUBY_TOOL_MATERIAL =
             EnumHelper.addToolMaterial("mcmodding:ruby", 4, 1800, 16F, 5F, 30);
     public static final ItemArmor.ArmorMaterial RUBY_ARMOR_MATERIAL =
             EnumHelper.addArmorMaterial("mcmodding:ruby", 66, new int[]{5, 5, 5, 5}, 30);
 
-    /** Предметы **/
+    /* Предметы */
     public static final RingItem RING = new RingItem();
     public static final PaintCanItem PAINT_CAN = new PaintCanItem();
     public static final CherryItem CHERRY = new CherryItem();
     public static final RubyItem RUBY = new RubyItem();
 
-    /** Инструменты **/
+    /* Инструменты */
     public static final RubyAxe RUBY_AXE = new RubyAxe();
     public static final RubyHoe RUBY_HOE = new RubyHoe();
     public static final RubyPickaxe RUBY_PICKAXE = new RubyPickaxe();

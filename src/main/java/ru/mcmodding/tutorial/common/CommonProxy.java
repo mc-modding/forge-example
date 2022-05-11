@@ -6,15 +6,16 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import ru.mcmodding.tutorial.common.handler.ModItems;
 
 public class CommonProxy {
-    public void pre(FMLPreInitializationEvent e) {
+
+    public void preInit(FMLPreInitializationEvent event) {
         ModItems.register();
     }
 
-    public void init(FMLInitializationEvent e) {
+    public void init(FMLInitializationEvent event) {
 
     }
 
-    public void post(FMLPostInitializationEvent e) {
+    public void postInit(FMLPostInitializationEvent event) {
 
     }
 }
