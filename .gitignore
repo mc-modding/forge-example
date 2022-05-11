@@ -1,13 +1,13 @@
 # Gradle
-.gradle
-build
+/.gradle
+/build
 
 # Intellij Idea
-.idea
-out
+/.idea
+/out
 *.iml
 *.ipr
 *.iws
 
 # Other
-run
+/run

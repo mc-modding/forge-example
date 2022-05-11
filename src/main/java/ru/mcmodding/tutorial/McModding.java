@@ -9,6 +9,7 @@ import ru.mcmodding.tutorial.common.CommonProxy;
 
 @Mod(modid = McModding.MOD_ID)
 public class McModding {
+
     public static final String MOD_ID = "mcmodding";
 
     @SidedProxy(
@@ -18,17 +19,17 @@ public class McModding {
     public static CommonProxy proxy;
 
     @Mod.EventHandler
-    public void pre(FMLPreInitializationEvent e) {
-        proxy.pre(e);
+    public void preInit(FMLPreInitializationEvent event) {
+        proxy.preInit(event);
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent e) {
-        proxy.init(e);
+    public void init(FMLInitializationEvent event) {
+        proxy.init(event);
     }
 
     @Mod.EventHandler
-    public void post(FMLPostInitializationEvent e) {
-        proxy.post(e);
+    public void postInit(FMLPostInitializationEvent event) {
+        proxy.postInit(event);
     }
 }

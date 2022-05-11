@@ -1,0 +1,14 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = false
+max_line_length = 250
+tab_width = 4
+ij_continuation_indent_size = 8
+
+[*.java]
+ij_java_blank_lines_after_class_header = 1

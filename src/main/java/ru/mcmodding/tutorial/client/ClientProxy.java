@@ -5,9 +5,11 @@ import ru.mcmodding.tutorial.common.CommonProxy;
 import ru.mcmodding.tutorial.common.handler.ModItems;
 
 public class ClientProxy extends CommonProxy {
+
     @Override
-    public void init(FMLInitializationEvent e) {
-        super.init(e);
+    public void init(FMLInitializationEvent event) {
+        super.init(event); // Вызываем родительский метод из CommonProxy
+
         ModItems.registerRender();
     }
 }
