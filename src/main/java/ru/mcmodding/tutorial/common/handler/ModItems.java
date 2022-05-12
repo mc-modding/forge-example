@@ -13,6 +13,7 @@ import ru.mcmodding.tutorial.common.item.CherryItem;
 import ru.mcmodding.tutorial.common.item.PaintCanItem;
 import ru.mcmodding.tutorial.common.item.RingItem;
 import ru.mcmodding.tutorial.common.item.RubyItem;
+import ru.mcmodding.tutorial.common.item.armor.RubyArmor;
 import ru.mcmodding.tutorial.common.item.tool.*;
 
 public class ModItems {
@@ -37,6 +38,12 @@ public class ModItems {
     public static final RubySword RUBY_SWORD = new RubySword();
     public static final RubyMultiTool RUBY_MULTI_TOOL = new RubyMultiTool();
 
+    /* Броня */
+    public static final RubyArmor RUBY_HELMET = new RubyArmor("helmet", 0);
+    public static final RubyArmor RUBY_PLATE = new RubyArmor("plate", 1);
+    public static final RubyArmor RUBY_LEGS = new RubyArmor("legs", 2);
+    public static final RubyArmor RUBY_BOOTS = new RubyArmor("boots", 3);
+
     static {
         RUBY_TOOL_MATERIAL.setRepairItem(new ItemStack(RUBY));
         RUBY_ARMOR_MATERIAL.customCraftingMaterial = RUBY;
@@ -54,6 +61,11 @@ public class ModItems {
         GameRegistry.registerItem(RUBY_SPADE, "ruby_spade");
         GameRegistry.registerItem(RUBY_SWORD, "ruby_sword");
         GameRegistry.registerItem(RUBY_MULTI_TOOL, "ruby_multi_tool");
+
+        GameRegistry.registerItem(RUBY_HELMET, "ruby_helmet");
+        GameRegistry.registerItem(RUBY_PLATE, "ruby_plate");
+        GameRegistry.registerItem(RUBY_LEGS, "ruby_legs");
+        GameRegistry.registerItem(RUBY_BOOTS, "ruby_boots");
     }
 
     @SideOnly(Side.CLIENT)
