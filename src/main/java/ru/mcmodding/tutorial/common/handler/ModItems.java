@@ -39,10 +39,10 @@ public class ModItems {
     public static final RubyMultiTool RUBY_MULTI_TOOL = new RubyMultiTool();
 
     /* Броня */
-    public static final RubyArmor RUBY_HELMET = new RubyArmor("helmet", 0);
-    public static final RubyArmor RUBY_PLATE = new RubyArmor("plate", 1);
-    public static final RubyArmor RUBY_LEGS = new RubyArmor("legs", 2);
-    public static final RubyArmor RUBY_BOOTS = new RubyArmor("boots", 3);
+    public static final RubyArmor RUBY_HELMET = new RubyArmor("helmet", 0, true);
+    public static final RubyArmor RUBY_PLATE = new RubyArmor("plate", 1, true);
+    public static final RubyArmor RUBY_LEGS = new RubyArmor("legs", 2, true);
+    public static final RubyArmor RUBY_BOOTS = new RubyArmor("boots", 3, true);
 
     static {
         RUBY_TOOL_MATERIAL.setRepairItem(new ItemStack(RUBY));
