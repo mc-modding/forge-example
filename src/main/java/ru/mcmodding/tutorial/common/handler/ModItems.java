@@ -3,16 +3,15 @@ package ru.mcmodding.tutorial.common.handler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 import ru.mcmodding.tutorial.client.render.item.RingItemRender;
-import ru.mcmodding.tutorial.common.item.CherryItem;
-import ru.mcmodding.tutorial.common.item.PaintCanItem;
-import ru.mcmodding.tutorial.common.item.RingItem;
-import ru.mcmodding.tutorial.common.item.RubyItem;
+import ru.mcmodding.tutorial.common.item.*;
 import ru.mcmodding.tutorial.common.item.armor.RubyArmor;
 import ru.mcmodding.tutorial.common.item.tool.*;
 
@@ -29,6 +28,7 @@ public class ModItems {
     public static final PaintCanItem PAINT_CAN = new PaintCanItem();
     public static final CherryItem CHERRY = new CherryItem();
     public static final RubyItem RUBY = new RubyItem();
+    public static final BalloonItem BALLOON = new BalloonItem();
 
     /* Инструменты */
     public static final RubyAxe RUBY_AXE = new RubyAxe();
@@ -54,6 +54,7 @@ public class ModItems {
         GameRegistry.registerItem(PAINT_CAN, "paint_can");
         GameRegistry.registerItem(CHERRY, "cherry");
         GameRegistry.registerItem(RUBY, "ruby");
+        GameRegistry.registerItem(BALLOON, "balloon");
 
         GameRegistry.registerItem(RUBY_AXE, "ruby_axe");
         GameRegistry.registerItem(RUBY_HOE, "ruby_hoe");
