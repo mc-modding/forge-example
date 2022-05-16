@@ -12,6 +12,11 @@ item.ruby_spade.name=Рубиновая лопата
 item.ruby_sword.name=Рубиновый меч
 item.ruby_multi_tool.name=Рубиновый мультиинструмент
 
+item.ruby_helmet.name=Рубиновый шлем
+item.ruby_plate.name=Рубиновый нагрудник
+item.ruby_legs.name=Рубиновые штаны
+item.ruby_boots.name=Рубиновые ботинки
+
 entity.mcmodding.goose.name=Гусь
 
 tile.ruby.name=Рубиновый блок

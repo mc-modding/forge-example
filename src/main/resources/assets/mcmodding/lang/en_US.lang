@@ -12,6 +12,11 @@ item.ruby_spade.name=Ruby Spade
 item.ruby_sword.name=Ruby Sword
 item.ruby_multi_tool.name=Ruby Multi-Tool
 
+item.ruby_helmet.name=Ruby Helmet
+item.ruby_plate.name=Ruby Plate
+item.ruby_legs.name=Ruby Legs
+item.ruby_boots.name=Ruby Boots
+
 entity.mcmodding.goose.name=Goose
 
 tile.ruby.name=Ruby Block
