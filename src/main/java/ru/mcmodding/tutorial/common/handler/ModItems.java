@@ -23,6 +23,9 @@ public class ModItems {
     public static final ItemArmor.ArmorMaterial RUBY_ARMOR_MATERIAL =
             EnumHelper.addArmorMaterial("mcmodding:ruby", 66, new int[]{5, 5, 5, 5}, 30);
 
+    /* Редкость */
+    public static final EnumRarity LEGENDARY_RARITY = EnumHelper.addRarity("mcmodding:legendary", EnumChatFormatting.RED, "Legendary");
+
     /* Предметы */
     public static final RingItem RING = new RingItem();
     public static final PaintCanItem PAINT_CAN = new PaintCanItem();
