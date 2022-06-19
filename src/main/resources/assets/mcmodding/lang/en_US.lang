@@ -5,6 +5,23 @@ item.paint_can.name=Paint Can
 item.cherry.name=Cherry
 item.ruby.name=Ruby
 
+item.balloon_black.name=Black balloon
+item.balloon_red.name=Red balloon
+item.balloon_green.name=Green balloon
+item.balloon_brown.name=Brown balloon
+item.balloon_blue.name=Blue balloon
+item.balloon_purple.name=Purple balloon
+item.balloon_cyan.name=Cyan balloon
+item.balloon_silver.name=Silver balloon
+item.balloon_gray.name=Gray balloon
+item.balloon_pink.name=Pink balloon
+item.balloon_lime.name=Lime balloon
+item.balloon_yellow.name=Yellow balloon
+item.balloon_light_blue.name=Light-Blue balloon
+item.balloon_magenta.name=Magenta balloon
+item.balloon_orange.name=Orange balloon
+item.balloon_white.name=White balloon
+
 item.ruby_axe.name=Ruby Axe
 item.ruby_hoe.name=Ruby Hoe
 item.ruby_pickaxe.name=Ruby Pickaxe

@@ -5,6 +5,23 @@ item.paint_can.name=Банка краски
 item.cherry.name=Черешня
 item.ruby.name=Рубин
 
+item.balloon_black.name=Чёрный воздушный шарик
+item.balloon_red.name=Красный воздушный шарик
+item.balloon_green.name=Зелёный воздушный шарик
+item.balloon_brown.name=Коричневый воздушный шарик
+item.balloon_blue.name=Синий воздушный шарик
+item.balloon_purple.name=Фиолетовый воздушный шарик
+item.balloon_cyan.name=Бирюзовый воздушный шарик
+item.balloon_silver.name=Серебряный воздушный шарик
+item.balloon_gray.name=Серый воздушный шарик
+item.balloon_pink.name=Розовый воздушный шарик
+item.balloon_lime.name=Лаймовый воздушный шарик
+item.balloon_yellow.name=Жёлтый воздушный шарик
+item.balloon_light_blue.name=Голубой воздушный шарик
+item.balloon_magenta.name=Пурпурный воздушный шарик
+item.balloon_orange.name=Оранжевый воздушный шарик
+item.balloon_white.name=Белый воздушный шарик
+
 item.ruby_axe.name=Рубиновый топор
 item.ruby_hoe.name=Рубиновая мотыга
 item.ruby_pickaxe.name=Рубиновая кирка
