@@ -3,6 +3,7 @@ package ru.mcmodding.tutorial.common.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import ru.mcmodding.tutorial.McModding;
+import ru.mcmodding.tutorial.common.handler.ModBlocks;
 import ru.mcmodding.tutorial.common.handler.ModTab;
 
 public class RubyBlock extends Block {
@@ -11,5 +12,15 @@ public class RubyBlock extends Block {
         setBlockName("ruby");
         setBlockTextureName(McModding.MOD_ID + ":ruby");
         setCreativeTab(ModTab.INSTANCE);
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return ModBlocks.rubyRenderId;
     }
 }
