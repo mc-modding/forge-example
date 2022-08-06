@@ -12,10 +12,10 @@ public class RubyBlockRenderer implements ISimpleBlockRenderingHandler {
     /**
      * Данный метод отвечает за отрисовку блока в инвентаре.
      *
-     * @param block блок для которого применяется данная отрисовка
-     * @param metadata метаданные блока
-     * @param modelId уникальный идентификатор модели
-     * @param renderer глобальный рендер блоков
+     * @param block     блок для которого применяется данная отрисовка
+     * @param metadata  метаданные блока
+     * @param modelId   уникальный идентификатор модели
+     * @param renderer  глобальный рендер блоков
      */
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
