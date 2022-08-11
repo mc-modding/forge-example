@@ -36,5 +36,24 @@ item.ruby_boots.name=Рубиновые ботинки
 
 entity.mcmodding.goose.name=Гусь
 
+tile.colored_stone.black.name=Чёрный камень
+tile.colored_stone.red.name=Красный камень
+tile.colored_stone.green.name=Зелёный камень
+tile.colored_stone.brown.name=Коричневый камень
+tile.colored_stone.blue.name=Синий камень
+tile.colored_stone.purple.name=Фиолетовый камень
+tile.colored_stone.cyan.name=Бирюзовый камень
+tile.colored_stone.silver.name=Серебряный камень
+tile.colored_stone.gray.name=Серый камень
+tile.colored_stone.pink.name=Розовый камень
+tile.colored_stone.lime.name=Лаймовый камень
+tile.colored_stone.yellow.name=Жёлтый камень
+tile.colored_stone.light_blue.name=Голубой камень
+tile.colored_stone.magenta.name=Пурпурный камень
+tile.colored_stone.orange.name=Оранжевый камень
+tile.colored_stone.white.name=Белый камень
+
+tile.face.name=Облицованный блок
+
 tile.ruby.name=Рубиновый блок
 tile.ruby_ore.name=Рубиновая руда
