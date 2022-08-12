@@ -57,3 +57,5 @@ tile.face.name=Облицованный блок
 
 tile.ruby.name=Рубиновый блок
 tile.ruby_ore.name=Рубиновая руда
+
+tile.storage.name=Хранилище

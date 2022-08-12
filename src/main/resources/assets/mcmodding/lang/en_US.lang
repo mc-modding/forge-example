@@ -57,3 +57,5 @@ tile.face.name=Faced block
 
 tile.ruby.name=Ruby Block
 tile.ruby_ore.name=Ruby Ore
+
+tile.storage.name=Storage
