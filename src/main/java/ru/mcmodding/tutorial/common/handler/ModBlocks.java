@@ -1,11 +1,13 @@
 package ru.mcmodding.tutorial.common.handler;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ru.mcmodding.tutorial.McModding;
 import ru.mcmodding.tutorial.client.render.block.RubyBlockRenderer;
+import ru.mcmodding.tutorial.client.render.tile.SmelterTesr;
 import ru.mcmodding.tutorial.common.block.*;
 import ru.mcmodding.tutorial.common.item.block.ColoredStoneBlockItem;
 import ru.mcmodding.tutorial.common.tile.SmelterTile;
@@ -38,5 +40,7 @@ public class ModBlocks {
         rubyRenderId = RenderingRegistry.getNextAvailableRenderId();
 
         RenderingRegistry.registerBlockHandler(new RubyBlockRenderer());
+
+        ClientRegistry.bindTileEntitySpecialRenderer(SmelterTile.class, new SmelterTesr());
     }
 }

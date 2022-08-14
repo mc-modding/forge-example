@@ -17,6 +17,32 @@ public class SmelterBlock extends BlockContainer {
         setCreativeTab(ModTab.INSTANCE);
     }
 
+    /**
+     * Указывает Minecraft, что блок является нормальным блоком для отрисовки(обычным кубом).
+     *
+     * @return Возвращает логическое условие.
+     */
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    /**
+     * Указывает Minecraft, что блок является непрозрачным. Если указать true, то пространство внутри блока будет создавать
+     * x-ray эффект.
+     *
+     * @return Возвращает логическое условие.
+     */
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
+
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer activator, int side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
