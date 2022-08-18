@@ -7,6 +7,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 
@@ -18,21 +21,41 @@ public class SmelterTile extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-
-        if (stack != null) {
-            NBTTagCompound inventoryTag = new NBTTagCompound();
-            stack.writeToNBT(inventoryTag);
-            nbt.setTag(INV_TAG, inventoryTag);
-        }
+        writeExtendedData(nbt);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
+        readExtendedData(nbt);
+    }
 
-        if (nbt.hasKey(INV_TAG, Constants.NBT.TAG_COMPOUND)) {
-            NBTTagCompound inventoryTag = nbt.getCompoundTag(INV_TAG);
-            stack = ItemStack.loadItemStackFromNBT(inventoryTag);
+    /**
+     * Данный метод вызывается для отправки пакета с информацией о Tile Entity на клиент.
+     *
+     * @return Возвращает пакет с информацией о Tile Entity.
+     */
+    @Override
+    public Packet getDescriptionPacket() {
+        // Создаём объект NBTTagCompound, чтобы записать в него данные для отправки
+        NBTTagCompound nbt = new NBTTagCompound();
+        // Записываем изолированные от родительских данные
+        writeExtendedData(nbt);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+    }
+
+    /**
+     * Данный метод вызывается на клиенте при получении пакета с информацией о Tile Entity с сервера.
+     *
+     * @param net NetworkManager от которого исходил пакет
+     * @param packet пакет данных
+     */
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        // Получаем Tile Entity по
+        TileEntity tile = worldObj.getTileEntity(packet.func_148856_c(), packet.func_148855_d(), packet.func_148854_e());
+        if (tile instanceof SmelterTile) {
+            ((SmelterTile) tile).readExtendedData(packet.func_148857_g());
         }
     }
 
@@ -82,5 +105,20 @@ public class SmelterTile extends TileEntity {
             --stack.stackSize;
         }
         markDirty();
+    }
+
+    private void writeExtendedData(NBTTagCompound nbt) {
+        if (stack != null) {
+            NBTTagCompound inventoryTag = new NBTTagCompound();
+            stack.writeToNBT(inventoryTag);
+            nbt.setTag(INV_TAG, inventoryTag);
+        }
+    }
+
+    private void readExtendedData(NBTTagCompound nbt) {
+        if (nbt.hasKey(INV_TAG, Constants.NBT.TAG_COMPOUND)) {
+            NBTTagCompound inventoryTag = nbt.getCompoundTag(INV_TAG);
+            stack = ItemStack.loadItemStackFromNBT(inventoryTag);
+        }
     }
 }
