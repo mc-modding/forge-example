@@ -29,6 +29,9 @@ item.ruby_spade.name=Ruby Spade
 item.ruby_sword.name=Ruby Sword
 item.ruby_multi_tool.name=Ruby Multi-Tool
 
+item.juice_bucket.name=Juice Bucket
+item.steam_bucket.name=Steam Bucket
+
 item.ruby_helmet.name=Ruby Helmet
 item.ruby_plate.name=Ruby Plate
 item.ruby_legs.name=Ruby Legs
@@ -60,3 +63,6 @@ tile.ruby_ore.name=Ruby Ore
 
 tile.smelter.name=Smelter
 tile.storage.name=Storage
+
+tile.juice.name=Juice
+tile.steam.name=Steam

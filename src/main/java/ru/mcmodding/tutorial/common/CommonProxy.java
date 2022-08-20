@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import ru.mcmodding.tutorial.common.handler.BucketHandler;
 import ru.mcmodding.tutorial.common.handler.FuelHandler;
 import ru.mcmodding.tutorial.common.handler.ModBlocks;
 import ru.mcmodding.tutorial.common.handler.ModItems;
@@ -18,6 +19,8 @@ public class CommonProxy {
         ModItems.register();
 
         GameRegistry.registerFuelHandler(new FuelHandler());
+
+        MinecraftForge.EVENT_BUS.register(new BucketHandler());
     }
 
     public void init(FMLInitializationEvent event) {

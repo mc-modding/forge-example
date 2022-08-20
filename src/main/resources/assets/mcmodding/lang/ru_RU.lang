@@ -29,6 +29,9 @@ item.ruby_spade.name=Рубиновая лопата
 item.ruby_sword.name=Рубиновый меч
 item.ruby_multi_tool.name=Рубиновый мультиинструмент
 
+item.juice_bucket.name=Ведро сока
+item.steam_bucket.name=Ведро пара
+
 item.ruby_helmet.name=Рубиновый шлем
 item.ruby_plate.name=Рубиновый нагрудник
 item.ruby_legs.name=Рубиновые штаны
@@ -60,3 +63,6 @@ tile.ruby_ore.name=Рубиновая руда
 
 tile.smelter.name=Плавильня
 tile.storage.name=Хранилище
+
+tile.juice.name=Сок
+tile.steam.name=Пар
