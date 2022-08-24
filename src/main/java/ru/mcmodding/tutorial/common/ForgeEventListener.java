@@ -5,7 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.FuelBurnTimeEvent;
 
-public class EventListener {
+public class ForgeEventListener {
     @SubscribeEvent
     public void onFuelBurnTime(FuelBurnTimeEvent event) {
         if (event.fuel == null) return;
