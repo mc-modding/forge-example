@@ -11,7 +11,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
+import ru.mcmodding.tutorial.common.handler.event.SmelterEvent;
 
 public class SmelterTile extends TileEntity {
     private ItemStack stack;
@@ -70,8 +72,14 @@ public class SmelterTile extends TileEntity {
          * Если игровое время в результате деления 100(5 сек) с остатком возвращает 0, то выполняется проверка на стек внутри плавильни.
          */
         if (!worldObj.isRemote && hasStack() && worldObj.getTotalWorldTime() % 100 == 0) {
+            SmelterEvent event = new SmelterEvent(stack.getItem());
+            if (MinecraftForge.EVENT_BUS.post(event)) {
+                worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord + 1, zCoord, event.getOutput()));
+                stack = null;
+                markDirty();
+            }
             // Если предмет является блоком угольной руды, то создаём сущность предмета, которая содержит в себе стек с предметом "уголь"
-            if (stack.getItem() == Item.getItemFromBlock(Blocks.coal_ore)) {
+            else if (stack.getItem() == Item.getItemFromBlock(Blocks.coal_ore)) {
                 worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord + 1, zCoord, new ItemStack(Items.coal)));
                 // Не забываем удалить стек
                 stack = null;

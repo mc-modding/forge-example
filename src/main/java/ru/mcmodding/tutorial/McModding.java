@@ -5,6 +5,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import ru.mcmodding.tutorial.common.CommonProxy;
 
@@ -23,6 +24,8 @@ public class McModding {
     public static CommonProxy proxy;
 
     public static final SimpleNetworkWrapper NETWORK = new SimpleNetworkWrapper(McModding.MOD_ID + ":channel");
+
+    public static final EventBus MODDING_BUS = new EventBus();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
