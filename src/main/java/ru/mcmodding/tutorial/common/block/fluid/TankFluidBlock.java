@@ -26,54 +26,30 @@ public class TankFluidBlock extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer activator, int side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote) {
-            TileEntity tile = world.getTileEntity(x, y, z);
+        if (world.isRemote) {
+            return true;
+        }
 
-            if (tile instanceof TankFluidTile) {
-                ItemStack held = activator.getHeldItem();
+        TileEntity tile = world.getTileEntity(x, y, z);
 
-                if (held == null) {
-                    return false;
-                }
+        if (tile instanceof TankFluidTile) {
+            ItemStack held = activator.getHeldItem();
 
-                // Если в руке жидкостная ячейка, то заполняем её
-                if (held.getItem() == ModItems.FLUID_CELL) {
-                    // Пробуем выкачать жидкость из резервуара без явного уменьшения кол-ва жидкости
-                    FluidStack fluidStack = ((TankFluidTile) tile).drain(ForgeDirection.UP, 1000, false);
-                    // Если стек не равен null и кол-во жидкости больше 0, то заливаем жидкость в жидкостную ячейку
-                    // Прежде чем заполнить, необходимо проверить, можем ли мы заполнить ячейку, без явного заполнения оной
-                    if (fluidStack != null && fluidStack.amount > 0 && ((FluidCellItem) held.getItem()).fill(held, fluidStack, false) > 0) {
-                        // Если всё прошло успешно, то необходимо явно выкачать из резервуара жидкость и заполнить ячейку
-                        fluidStack = ((TankFluidTile) tile).drain(ForgeDirection.UP, 1000, true);
-                        ((FluidCellItem) held.getItem()).fill(held, fluidStack, true);
-                        // Сохраняем и синхронизируем данные с клиентом
-                        tile.markDirty();
-                        world.markBlockForUpdate(x, y, z);
-                    }
-                } else if (held.getItem() == Items.bucket) {
-                    FluidStack fluidStack = ((TankFluidTile) tile).drain(ForgeDirection.UP, 1000, false);
-                    if (fluidStack != null && fluidStack.amount > 0) {
-                        fluidStack = ((TankFluidTile) tile).drain(ForgeDirection.UP, 1000, true);
-                        // Получаем заполненный контейнер с жидкостью по стеку жидкости
-                        ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluidStack, held);
-                        if (filled != null && !activator.inventory.addItemStackToInventory(filled)) {
-                            activator.dropPlayerItemWithRandomChoice(filled, false);
-                        } else {
-                            activator.openContainer.detectAndSendChanges();
-                        }
-                        --held.stackSize;
-                    }
-                } else {
-                    // Получаем жидкость из контейнера по стеку предмета
-                    FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(held);
-                    // Проверяем, что мы можем заполнить резервуар жидкостью, без явного заполнения
-                    if (((TankFluidTile) tile).fill(ForgeDirection.UP, fluidStack, false) > 0) {
-                        // Заполняем резервуар явно
-                        ((TankFluidTile) tile).fill(ForgeDirection.UP, fluidStack, true);
-                        tile.markDirty();
-                        world.markBlockForUpdate(x, y, z);
-                    }
-                }
+            if (held == null) {
+                return false;
+            }
+
+            // Если в руке жидкостная ячейка, то заполняем её
+            if (held.getItem() == ModItems.FLUID_CELL) {
+                handleFillCell((TankFluidTile) tile, held);
+            }
+            // Если в руке пустое ведро, то заполняем его
+            else if (held.getItem() == Items.bucket) {
+                handleFillBucket((TankFluidTile) tile, activator, held);
+            }
+            // Заполняем резервуар жидкостью
+            else {
+                handleFillFluidTank((TankFluidTile) tile, activator, held);
             }
         }
         return true;
@@ -82,5 +58,64 @@ public class TankFluidBlock extends BlockContainer {
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
         return new TankFluidTile();
+    }
+
+    private void handleFillCell(TankFluidTile tank, ItemStack held) {
+        // Пробуем выкачать жидкость из резервуара без явного уменьшения кол-ва жидкости
+        FluidStack fluidStack = tank.drain(ForgeDirection.UP, 1000, false);
+        // Если стек не равен null и кол-во жидкости больше 0, то заливаем жидкость в жидкостную ячейку
+        // Прежде чем заполнить, необходимо проверить, можем ли мы заполнить ячейку, без явного заполнения оной
+        if (fluidStack != null && fluidStack.amount > 0 && ((FluidCellItem) held.getItem()).fill(held, fluidStack, false) > 0) {
+            // Если всё прошло успешно, то необходимо явно выкачать из резервуара жидкость и заполнить ячейку
+            fluidStack = tank.drain(ForgeDirection.UP, 1000, true);
+            ((FluidCellItem) held.getItem()).fill(held, fluidStack, true);
+            // Сохраняем и синхронизируем данные с клиентом
+            tank.markDirty();
+            tank.getWorldObj().markBlockForUpdate(tank.xCoord, tank.yCoord, tank.zCoord);
+        }
+    }
+
+    private void handleFillBucket(TankFluidTile tank, EntityPlayer player, ItemStack held) {
+        FluidStack fluidStack = tank.drain(ForgeDirection.UP, 1000, false);
+        if (fluidStack != null && fluidStack.amount > 0) {
+            fluidStack = tank.drain(ForgeDirection.UP, 1000, true);
+            // Получаем заполненный контейнер с жидкостью по стеку жидкости
+            ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluidStack, held);
+            if (filled != null && !player.inventory.addItemStackToInventory(filled)) {
+                player.dropPlayerItemWithRandomChoice(filled, false);
+            } else {
+                player.openContainer.detectAndSendChanges();
+            }
+
+            if (!player.capabilities.isCreativeMode) {
+                --held.stackSize;
+            }
+
+            tank.markDirty();
+            tank.getWorldObj().markBlockForUpdate(tank.xCoord, tank.yCoord, tank.zCoord);
+        }
+    }
+
+    private void handleFillFluidTank(TankFluidTile tile, EntityPlayer player, ItemStack held) {
+        // Получаем жидкость из контейнера по стеку предмета
+        FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(held);
+        // Проверяем, что мы можем заполнить резервуар жидкостью, без явного заполнения
+        if (tile.fill(ForgeDirection.UP, fluidStack, false) > 0) {
+            // Заполняем резервуар явно
+            tile.fill(ForgeDirection.UP, fluidStack, true);
+
+            if (!player.capabilities.isCreativeMode) {
+                ItemStack emptyContainer = FluidContainerRegistry.drainFluidContainer(held);
+                if (!player.inventory.addItemStackToInventory(emptyContainer)) {
+                    player.dropPlayerItemWithRandomChoice(emptyContainer, false);
+                } else {
+                    player.openContainer.detectAndSendChanges();
+                }
+                --held.stackSize;
+            }
+
+            tile.markDirty();
+            tile.getWorldObj().markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
+        }
     }
 }
