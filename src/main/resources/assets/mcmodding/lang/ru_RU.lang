@@ -66,3 +66,6 @@ tile.storage.name=Хранилище
 
 tile.juice.name=Сок
 tile.steam.name=Пар
+
+# Messages
+mcmodding.message.hello=Привет от %s!
