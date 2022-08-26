@@ -14,7 +14,7 @@ import ru.mcmodding.tutorial.common.handler.packet.ServerMessagePacket;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
-        McModding.NETWORK.registerMessage(new ServerMessagePacket(), ServerMessagePacket.class, 0, Side.SERVER);
+        McModding.NETWORK.registerMessage(new ServerMessagePacket.Handler(), ServerMessagePacket.class, 0, Side.SERVER);
 
         FMLCommonHandler.instance().bus().register(new FMLEventListener());
         MinecraftForge.EVENT_BUS.register(new ForgeEventListener());
