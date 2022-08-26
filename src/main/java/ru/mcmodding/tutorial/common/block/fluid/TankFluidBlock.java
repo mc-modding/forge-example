@@ -39,16 +39,11 @@ public class TankFluidBlock extends BlockContainer {
                 return false;
             }
 
-            // Если в руке жидкостная ячейка, то заполняем её
             if (held.getItem() == ModItems.FLUID_CELL) {
                 handleFillCell((TankFluidTile) tile, held);
-            }
-            // Если в руке пустое ведро, то заполняем его
-            else if (held.getItem() == Items.bucket) {
+            } else if (held.getItem() == Items.bucket) {
                 handleFillBucket((TankFluidTile) tile, activator, held);
-            }
-            // Заполняем резервуар жидкостью
-            else {
+            } else {
                 handleFillFluidTank((TankFluidTile) tile, activator, held);
             }
         }
@@ -60,14 +55,21 @@ public class TankFluidBlock extends BlockContainer {
         return new TankFluidTile();
     }
 
+    /**
+     * Данный метод будет вызываться для заполнения {@link ModItems#FLUID_CELL}
+     *
+     * @param tank резервуар с жидкостью.
+     * @param held стек предмета находящийся в руке.
+     */
     private void handleFillCell(TankFluidTile tank, ItemStack held) {
         // Пробуем выкачать жидкость из резервуара без явного уменьшения кол-ва жидкости
-        FluidStack fluidStack = tank.drain(ForgeDirection.UP, 1000, false);
+        FluidStack fluidStack = tank.drain(ForgeDirection.UP, FluidContainerRegistry.BUCKET_VOLUME, false);
         // Если стек не равен null и кол-во жидкости больше 0, то заливаем жидкость в жидкостную ячейку
         // Прежде чем заполнить, необходимо проверить, можем ли мы заполнить ячейку, без явного заполнения оной
         if (fluidStack != null && fluidStack.amount > 0 && ((FluidCellItem) held.getItem()).fill(held, fluidStack, false) > 0) {
             // Если всё прошло успешно, то необходимо явно выкачать из резервуара жидкость и заполнить ячейку
-            fluidStack = tank.drain(ForgeDirection.UP, 1000, true);
+            fluidStack = tank.drain(ForgeDirection.UP, FluidContainerRegistry.BUCKET_VOLUME, true);
+            // Заполняем явно ячейку для жидкости
             ((FluidCellItem) held.getItem()).fill(held, fluidStack, true);
             // Сохраняем и синхронизируем данные с клиентом
             tank.markDirty();
@@ -75,19 +77,20 @@ public class TankFluidBlock extends BlockContainer {
         }
     }
 
+    /**
+     * Данный метод будет вызываться для заполнения пустого ведра.
+     *
+     * @param tank резервуар с жидкостью.
+     * @param player игрок взаимодействующий с блоком.
+     * @param held стек предмета находящийся в руке.
+     */
     private void handleFillBucket(TankFluidTile tank, EntityPlayer player, ItemStack held) {
-        FluidStack fluidStack = tank.drain(ForgeDirection.UP, 1000, false);
+        FluidStack fluidStack = tank.drain(ForgeDirection.UP, FluidContainerRegistry.BUCKET_VOLUME, false);
         if (fluidStack != null && fluidStack.amount > 0) {
-            fluidStack = tank.drain(ForgeDirection.UP, 1000, true);
-            // Получаем заполненный контейнер с жидкостью по стеку жидкости
-            ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluidStack, held);
-            if (filled != null && !player.inventory.addItemStackToInventory(filled)) {
-                player.dropPlayerItemWithRandomChoice(filled, false);
-            } else {
-                player.openContainer.detectAndSendChanges();
-            }
+            fluidStack = tank.drain(ForgeDirection.UP, FluidContainerRegistry.BUCKET_VOLUME, true);
 
             if (!player.capabilities.isCreativeMode) {
+                addItemStackOrDrop(player, FluidContainerRegistry.fillFluidContainer(fluidStack, held));
                 --held.stackSize;
             }
 
@@ -96,6 +99,13 @@ public class TankFluidBlock extends BlockContainer {
         }
     }
 
+    /**
+     * Данный метод будет вызываться для заполнения резервуара жидкостью из ведра/жидкостной ячейки.
+     *
+     * @param tile резервуар с жидкостью.
+     * @param player игрок взаимодействующий с блоком.
+     * @param held стек предмета находящийся в руке.
+     */
     private void handleFillFluidTank(TankFluidTile tile, EntityPlayer player, ItemStack held) {
         // Получаем жидкость из контейнера по стеку предмета
         FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(held);
@@ -105,17 +115,27 @@ public class TankFluidBlock extends BlockContainer {
             tile.fill(ForgeDirection.UP, fluidStack, true);
 
             if (!player.capabilities.isCreativeMode) {
-                ItemStack emptyContainer = FluidContainerRegistry.drainFluidContainer(held);
-                if (!player.inventory.addItemStackToInventory(emptyContainer)) {
-                    player.dropPlayerItemWithRandomChoice(emptyContainer, false);
-                } else {
-                    player.openContainer.detectAndSendChanges();
-                }
+                addItemStackOrDrop(player, FluidContainerRegistry.drainFluidContainer(held));
                 --held.stackSize;
             }
 
             tile.markDirty();
             tile.getWorldObj().markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
+        }
+    }
+
+    /**
+     * Данный метод служит для выдачи стека предмета в инвентарь с синхронизацией, если стек не удалось выдать, то предмет
+     * будет выброшен на землю.
+     *
+     * @param player игрок, которому будет выдан стек предмета.
+     * @param stack стек, который будет выдан.
+     */
+    private void addItemStackOrDrop(EntityPlayer player, ItemStack stack) {
+        if (!player.inventory.addItemStackToInventory(stack)) {
+            player.dropPlayerItemWithRandomChoice(stack, false);
+        } else {
+            player.openContainer.detectAndSendChanges();
         }
     }
 }
