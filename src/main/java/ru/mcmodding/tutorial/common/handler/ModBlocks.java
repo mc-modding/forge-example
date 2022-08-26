@@ -10,13 +10,15 @@ import net.minecraftforge.fluids.FluidRegistry;
 import ru.mcmodding.tutorial.McModding;
 import ru.mcmodding.tutorial.client.render.block.RubyBlockRenderer;
 import ru.mcmodding.tutorial.client.render.tile.SmelterTesr;
+import ru.mcmodding.tutorial.client.render.tile.TankFluidTesr;
 import ru.mcmodding.tutorial.common.block.*;
 import ru.mcmodding.tutorial.common.block.fluid.JuiceFluidBlock;
 import ru.mcmodding.tutorial.common.block.fluid.SteamFluidBlock;
+import ru.mcmodding.tutorial.common.block.fluid.TankFluidBlock;
 import ru.mcmodding.tutorial.common.item.block.ColoredStoneBlockItem;
-import ru.mcmodding.tutorial.common.item.tool.BucketItem;
 import ru.mcmodding.tutorial.common.tile.SmelterTile;
 import ru.mcmodding.tutorial.common.tile.StorageTile;
+import ru.mcmodding.tutorial.common.tile.TankFluidTile;
 
 public class ModBlocks {
     public static final ColoredStoneBlock COLORED_STONE = new ColoredStoneBlock();
@@ -25,6 +27,7 @@ public class ModBlocks {
     public static final RubyOreBlock RUBY_ORE = new RubyOreBlock();
     public static final SmelterBlock SMELTER = new SmelterBlock();
     public static final StorageBlock STORAGE = new StorageBlock();
+    public static final TankFluidBlock TANK_FLUID = new TankFluidBlock();
 
     public static final Fluid JUICE_FLUID = new Fluid(McModding.MOD_ID + ":juice");
     public static final Fluid STEAM_FLUID = new Fluid(McModding.MOD_ID + ":steam").setDensity(-1).setGaseous(true);
@@ -41,9 +44,11 @@ public class ModBlocks {
         GameRegistry.registerBlock(RUBY_ORE, "ruby_ore");
         GameRegistry.registerBlock(SMELTER, "smelter");
         GameRegistry.registerBlock(STORAGE, "storage");
+        GameRegistry.registerBlock(TANK_FLUID, "tank_fluid");
 
         GameRegistry.registerTileEntity(SmelterTile.class, McModding.MOD_ID + ":smelter");
         GameRegistry.registerTileEntity(StorageTile.class, McModding.MOD_ID + ":storage");
+        GameRegistry.registerTileEntity(TankFluidTile.class, McModding.MOD_ID + ":tank_fluid");
 
         // Жидкость должна быть зарегистрирована раньше, чем блок для которой она будет прикреплена!
         if (FluidRegistry.registerFluid(JUICE_FLUID)) {
@@ -52,14 +57,14 @@ public class ModBlocks {
             GameRegistry.registerBlock(JUICE, "juice");
 
             // Регистрировать ведро необходимо после регистрации блока жидкости и самой жидкости.
-            BucketHandler.registryBucket("juice", JUICE_FLUID);
+            ModItems.JUICE_BUCKET = BucketHandler.registryBucket("juice", JUICE_FLUID);
         }
 
         if (FluidRegistry.registerFluid(STEAM_FLUID)) {
             STEAM = new SteamFluidBlock(STEAM_FLUID);
             GameRegistry.registerBlock(STEAM, "steam");
 
-            BucketHandler.registryBucket("steam", STEAM_FLUID);
+            ModItems.STEAM_BUCKET = BucketHandler.registryBucket("steam", STEAM_FLUID);
         }
     }
 
@@ -70,5 +75,6 @@ public class ModBlocks {
         RenderingRegistry.registerBlockHandler(new RubyBlockRenderer());
 
         ClientRegistry.bindTileEntitySpecialRenderer(SmelterTile.class, new SmelterTesr());
+        ClientRegistry.bindTileEntitySpecialRenderer(TankFluidTile.class, new TankFluidTesr());
     }
 }

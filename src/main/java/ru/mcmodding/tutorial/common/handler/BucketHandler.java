@@ -30,7 +30,7 @@ public class BucketHandler {
         // Регистрируем экземпляр ведра
         GameRegistry.registerItem(bucket, name + "_bucket");
         // Регистрируем контейнер с жидкостью, т.е. ведро.
-        FluidContainerRegistry.registerFluidContainer(fluid, new ItemStack(bucket));
+        FluidContainerRegistry.registerFluidContainer(fluid, new ItemStack(bucket), FluidContainerRegistry.EMPTY_BUCKET);
         // Добавляем к нашему блоку жидкости ведро, которое будет даваться при сборе жидкости.
         buckets.put(fluid.getBlock(), bucket);
         return bucket;
