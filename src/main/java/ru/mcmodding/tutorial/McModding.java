@@ -5,9 +5,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import ru.mcmodding.tutorial.common.CommonProxy;
+import ru.mcmodding.tutorial.common.handler.command.CommandPing;
 
 @Mod(modid = McModding.MOD_ID)
 public class McModding {
@@ -40,5 +42,10 @@ public class McModding {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+    }
+
+    @Mod.EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandPing());
     }
 }
