@@ -67,5 +67,7 @@ tile.storage.name=Storage
 tile.juice.name=Juice
 tile.steam.name=Steam
 
+tile.tank_fluid.name=Fluid Tank
+
 # Messages
 mcmodding.message.hello=Hello from %s!

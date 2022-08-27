@@ -40,6 +40,9 @@ public class ModItems {
     public static final RubySpade RUBY_SPADE = new RubySpade();
     public static final RubySword RUBY_SWORD = new RubySword();
     public static final RubyMultiTool RUBY_MULTI_TOOL = new RubyMultiTool();
+    public static final FluidCellItem FLUID_CELL = new FluidCellItem();
+    public static BucketItem JUICE_BUCKET;
+    public static BucketItem STEAM_BUCKET;
 
     /* Броня */
     public static final RubyArmor RUBY_HELMET = new RubyArmor("helmet", 0, true);
@@ -65,6 +68,7 @@ public class ModItems {
         GameRegistry.registerItem(RUBY_SPADE, "ruby_spade");
         GameRegistry.registerItem(RUBY_SWORD, "ruby_sword");
         GameRegistry.registerItem(RUBY_MULTI_TOOL, "ruby_multi_tool");
+        GameRegistry.registerItem(FLUID_CELL, "fluid_cell");
 
         GameRegistry.registerItem(RUBY_HELMET, "ruby_helmet");
         GameRegistry.registerItem(RUBY_PLATE, "ruby_plate");
