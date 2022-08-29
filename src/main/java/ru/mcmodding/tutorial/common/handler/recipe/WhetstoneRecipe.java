@@ -26,37 +26,29 @@ public class WhetstoneRecipe implements IRecipe {
      */
     @Override
     public boolean matches(InventoryCrafting inventory, World world) {
-        // Проверяем, что инвентарь для крафта не пустой.
-        if (inventory.getSizeInventory() == 0) {
-            return false;
-        }
-
         ItemStack whetstone = null;
         ItemStack tool = null;
 
-        for (int row = 0; row < 3; row++) {
-            for (int column = 0; column < 3; column++) {
-                ItemStack stackInSlot = inventory.getStackInRowAndColumn(row, column);
+        for (int slotId = 0, size = inventory.getSizeInventory(), notEmpty = 0; slotId < size; slotId++) {
+            ItemStack stackInSlot = inventory.getStackInSlot(slotId);
 
-                if (stackInSlot == null) {
-                    continue;
-                }
+            if (stackInSlot == null) {
+                continue;
+            }
+            if (++notEmpty > 2) {
+                return false;
+            }
 
-                if (whetstone == null && stackInSlot.getItem() instanceof WhetstoneItem) {
-                    whetstone = stackInSlot;
-                } else if (tool == null && (stackInSlot.isItemEnchanted() || stackInSlot.isItemEnchantable())) {
-                    tool = stackInSlot;
-                    if (!stackInSlot.getItem().doesContainerItemLeaveCraftingGrid(tool)) {
-                        return false;
-                    }
-                }
-
-                if (whetstone != null && tool != null && whetstone.getItem() != tool.getItem()) {
-                    return true;
+            if (whetstone == null && stackInSlot.getItem() instanceof WhetstoneItem) {
+                whetstone = stackInSlot;
+            } else if (tool == null && (stackInSlot.isItemEnchanted() || stackInSlot.isItemEnchantable())) {
+                tool = stackInSlot;
+                if (!stackInSlot.getItem().doesContainerItemLeaveCraftingGrid(tool)) {
+                    return false;
                 }
             }
         }
-        return false;
+        return whetstone != null && tool != null && whetstone.getItem() != tool.getItem();
     }
 
     /**
@@ -66,38 +58,33 @@ public class WhetstoneRecipe implements IRecipe {
      */
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inventory) {
-        if (inventory.getSizeInventory() == 0) {
-            return null;
-        }
-
         ItemStack whetstone = null;
         ItemStack tool = null;
 
-        for (int row = 0; row < 3; row++) {
-            for (int column = 0; column < 3; column++) {
-                ItemStack stackInSlot = inventory.getStackInRowAndColumn(row, column);
+        for (int slotId = 0, size = inventory.getSizeInventory(); slotId < size; slotId++) {
+            ItemStack stackInSlot = inventory.getStackInSlot(slotId);
 
-                if (stackInSlot == null) {
-                    continue;
-                }
+            if (stackInSlot == null) {
+                continue;
+            }
 
-                if (whetstone == null && stackInSlot.getItem() instanceof WhetstoneItem) {
-                    whetstone = stackInSlot;
-                } else if (tool == null && stackInSlot.isItemEnchanted() || stackInSlot.isItemEnchantable()) {
-                    tool = stackInSlot;
-                }
+            if (whetstone == null && stackInSlot.getItem() instanceof WhetstoneItem) {
+                whetstone = stackInSlot;
+            } else if (stackInSlot.isItemEnchanted() || stackInSlot.isItemEnchantable()) {
+                tool = stackInSlot;
+                break;
+            }
+        }
 
-                if (whetstone != null && tool != null && whetstone.getItem() != tool.getItem()) {
-                    if (!stackInSlot.getItem().doesContainerItemLeaveCraftingGrid(tool)) {
-                        return null;
-                    }
+        if (whetstone != null && tool != null && whetstone.getItem() != tool.getItem()) {
+            if (!tool.getItem().doesContainerItemLeaveCraftingGrid(tool)) {
+                return null;
+            }
 
-                    if (whetstone.getItem() == ModItems.WHETSTONE && tool.isItemEnchantable()) {
-                        return handleDisenchantedTool(tool);
-                    } else if (whetstone.getItem() == ModItems.ANTI_ENCHANT_WHETSTONE && tool.isItemEnchanted()) {
-                        return handleEnchantedTool(tool);
-                    }
-                }
+            if (whetstone.getItem() == ModItems.WHETSTONE && tool.isItemEnchantable()) {
+                return handleDisenchantedTool(tool);
+            } else if (whetstone.getItem() == ModItems.ANTI_ENCHANT_WHETSTONE && tool.isItemEnchanted()) {
+                return handleEnchantedTool(tool);
             }
         }
         return null;
@@ -124,15 +111,24 @@ public class WhetstoneRecipe implements IRecipe {
         return null;
     }
 
+    /**
+     * Вызывается для удаления чар с инструмента.
+     *
+     * @param tool стек инструмента.
+     * @return Возвращает копию стека инструмента без чар.
+     */
     private ItemStack handleEnchantedTool(ItemStack tool) {
-        if (tool.hasTagCompound()) {
-            ItemStack toolCopy = tool.copy();
-            toolCopy.getTagCompound().removeTag("ench");
-            return toolCopy;
-        }
-        return null;
+        ItemStack toolCopy = tool.copy();
+        toolCopy.getTagCompound().removeTag("ench");
+        return toolCopy;
     }
 
+    /**
+     * Вызывается для зачаривания инструмента по заготовленным чарам.
+     *
+     * @param tool стек инструмента.
+     * @return Возвращает копию стека инструмента с чарами.
+     */
     private ItemStack handleDisenchantedTool(ItemStack tool) {
         ItemStack toolCopy = tool.copy();
         Enchantment enchantment = availableEnchantments[random.nextInt(availableEnchantments.length)];

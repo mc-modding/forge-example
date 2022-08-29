@@ -2,14 +2,11 @@ package ru.mcmodding.tutorial.common.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 import ru.mcmodding.tutorial.McModding;
 import ru.mcmodding.tutorial.common.handler.ModTab;
 
@@ -29,31 +26,38 @@ public class WhetstoneItem extends Item {
         setNoRepair();
     }
 
+    /**
+     * Разрешить или запретить определенную комбинацию книги/предмета в качестве заклинания наковальни.
+     *
+     * @param stack стек предмета для зачаривания.
+     * @param book книга с чарами.
+     *
+     * @return Возвращает логическое условие.
+     */
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         return false;
     }
 
-    @Override
-    public boolean canHarvestBlock(Block block, ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase victim, EntityLivingBase attacker) {
-        return false;
-    }
-
-    @Override
-    public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entity) {
-        return false;
-    }
-
+    /**
+     * Возвращает true, если предмет содержит предмет-контейнер.
+     *
+     * @param stack текущий стек предмета.
+     * @return Возвращает логическое условие.
+     */
     @Override
     public boolean hasContainerItem(ItemStack stack) {
         return true;
     }
 
+    /**
+     * Возвращает стек с предметом-контейнером, который содержит в себе какую-либо информацию. Используется для получения
+     * результата крафта.
+     *
+     * @param stack текущий стек предмета.
+     *
+     * @return Возвращает стек с предметом-контейнером.
+     */
     @Override
     public ItemStack getContainerItem(ItemStack stack) {
         ItemStack stackCopy = stack.copy();
@@ -61,6 +65,13 @@ public class WhetstoneItem extends Item {
         return stackCopy.getItemDamage() >= stackCopy.getMaxDamage() ? null : stackCopy;
     }
 
+    /**
+     * Возвращает условие, что предмет должен покинуть сетку крафта, при получении результата (предмет будет удалён).
+     *
+     * @param stack стек предмета.
+     *
+     * @return Возвращает логическое условие.
+     */
     @Override
     public boolean doesContainerItemLeaveCraftingGrid(ItemStack stack) {
         return false;
