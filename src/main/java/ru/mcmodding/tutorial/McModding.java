@@ -25,7 +25,7 @@ public class McModding {
     )
     public static CommonProxy proxy;
 
-    public static final SimpleNetworkWrapper NETWORK = new SimpleNetworkWrapper(McModding.MOD_ID + ":channel");
+    public static final SimpleNetworkWrapper NETWORK = new SimpleNetworkWrapper(McModding.MOD_ID);
 
     public static final EventBus MODDING_BUS = new EventBus();
 
