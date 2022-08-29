@@ -37,6 +37,9 @@ item.ruby_plate.name=Рубиновый нагрудник
 item.ruby_legs.name=Рубиновые штаны
 item.ruby_boots.name=Рубиновые ботинки
 
+item.whetstone.name=Точильный камень
+item.anti_enchant_whetstone.name=Точильный камень: Анти-чары
+
 entity.mcmodding.goose.name=Гусь
 
 tile.colored_stone.black.name=Чёрный камень

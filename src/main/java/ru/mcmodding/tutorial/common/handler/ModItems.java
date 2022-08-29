@@ -50,6 +50,10 @@ public class ModItems {
     public static final RubyArmor RUBY_LEGS = new RubyArmor("legs", 2, true);
     public static final RubyArmor RUBY_BOOTS = new RubyArmor("boots", 3, true);
 
+    /* Другое */
+    public static final WhetstoneItem WHETSTONE = new WhetstoneItem("whetstone", 50);
+    public static final WhetstoneItem ANTI_ENCHANT_WHETSTONE = new WhetstoneItem("anti_enchant_whetstone", 70);
+
     static {
         RUBY_TOOL_MATERIAL.setRepairItem(new ItemStack(RUBY));
         RUBY_ARMOR_MATERIAL.customCraftingMaterial = RUBY;
@@ -74,6 +78,9 @@ public class ModItems {
         GameRegistry.registerItem(RUBY_PLATE, "ruby_plate");
         GameRegistry.registerItem(RUBY_LEGS, "ruby_legs");
         GameRegistry.registerItem(RUBY_BOOTS, "ruby_boots");
+
+        GameRegistry.registerItem(WHETSTONE, "whetstone");
+        GameRegistry.registerItem(ANTI_ENCHANT_WHETSTONE, "anti_enchant_whetstone");
     }
 
     @SideOnly(Side.CLIENT)
