@@ -30,11 +30,22 @@ public class ChestBlock extends BlockContainer {
         setHardness(2.5F);
         setStepSound(soundTypeWood);
         setBlockName("mcmodding.chest");
+        setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 0.9375F, 0.9375F);
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new ChestTile();
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 
     @SideOnly(Side.CLIENT)

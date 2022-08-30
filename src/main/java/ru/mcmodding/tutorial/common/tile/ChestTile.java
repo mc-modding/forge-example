@@ -13,6 +13,11 @@ public class ChestTile extends TileEntity implements IInventory {
     private final ItemStack[] items = new ItemStack[63];
 
     @Override
+    public boolean canUpdate() {
+        return false;
+    }
+
+    @Override
     public int getSizeInventory() {
         return items.length;
     }
