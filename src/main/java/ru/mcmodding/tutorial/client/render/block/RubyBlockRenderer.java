@@ -40,8 +40,6 @@ public class RubyBlockRenderer implements ISimpleBlockRenderingHandler {
         // Получаем текстуру блока
         IIcon icon = renderer.getBlockIcon(block, world, x, y, z, side);
 
-        Tessellator.instance.startDrawingQuads();
-
         // Отрисовка прямоугольника по координате X с инвертированием на обратную сторону
         renderer.renderFaceXNeg(block, x, y, z, icon);
         renderer.renderFaceXPos(block, x, y, z, icon);
