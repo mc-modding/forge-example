@@ -16,6 +16,12 @@ public class WhetstoneItem extends Item {
     @SideOnly(Side.CLIENT)
     private IIcon[] damagedIcons;
 
+    /**
+     * Создаёт объект с заданными параметрами названия и прочности предмета.
+     *
+     * @param name название предмета.
+     * @param maxDamage максимальная прочность.
+     */
     public WhetstoneItem(String name, int maxDamage) {
         this.name = name;
         setMaxStackSize(1);
@@ -90,6 +96,7 @@ public class WhetstoneItem extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(int itemDamage) {
+        // На основе процента прочности, зададим "уровни" разрушаемости предмета через иконки.
         int segment = MathHelper.floor_float(((float) itemDamage / getMaxDamage()) * 10) / 2;
         return itemDamage == 0 ? itemIcon : damagedIcons[segment];
     }
