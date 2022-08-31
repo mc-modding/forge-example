@@ -13,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import ru.mcmodding.tutorial.McModding;
 import ru.mcmodding.tutorial.common.handler.*;
 import ru.mcmodding.tutorial.common.handler.packet.ServerMessagePacket;
+import ru.mcmodding.tutorial.common.handler.recipe.WhetstoneRecipe;
 
 public class CommonProxy {
 
@@ -42,5 +43,7 @@ public class CommonProxy {
         }
 
         GameRegistry.addSmelting(ModBlocks.RUBY_ORE, new ItemStack(ModItems.RUBY), 5F);
+
+        GameRegistry.addRecipe(new WhetstoneRecipe());
     }
 }
