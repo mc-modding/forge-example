@@ -20,6 +20,7 @@ import ru.mcmodding.tutorial.common.container.ChestContainer;
 import ru.mcmodding.tutorial.common.handler.*;
 import ru.mcmodding.tutorial.common.handler.packet.ServerMessagePacket;
 import ru.mcmodding.tutorial.common.tile.ChestTile;
+import ru.mcmodding.tutorial.common.handler.recipe.WhetstoneRecipe;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -53,6 +54,8 @@ public class CommonProxy implements IGuiHandler {
         }
 
         GameRegistry.addSmelting(ModBlocks.RUBY_ORE, new ItemStack(ModItems.RUBY), 5F);
+
+        GameRegistry.addRecipe(new WhetstoneRecipe());
     }
 
     @Override
