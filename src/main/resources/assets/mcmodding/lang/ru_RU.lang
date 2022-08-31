@@ -71,6 +71,7 @@ tile.juice.name=Сок
 tile.steam.name=Пар
 
 tile.tank_fluid.name=Резервуар для жидкости
+tile.mcmodding.chest.name=Сундук
 
 # Messages
 mcmodding.message.hello=Привет от %s!

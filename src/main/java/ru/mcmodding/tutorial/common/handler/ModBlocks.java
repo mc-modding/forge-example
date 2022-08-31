@@ -16,6 +16,7 @@ import ru.mcmodding.tutorial.common.block.fluid.JuiceFluidBlock;
 import ru.mcmodding.tutorial.common.block.fluid.SteamFluidBlock;
 import ru.mcmodding.tutorial.common.block.fluid.TankFluidBlock;
 import ru.mcmodding.tutorial.common.item.block.ColoredStoneBlockItem;
+import ru.mcmodding.tutorial.common.tile.ChestTile;
 import ru.mcmodding.tutorial.common.tile.SmelterTile;
 import ru.mcmodding.tutorial.common.tile.StorageTile;
 import ru.mcmodding.tutorial.common.tile.TankFluidTile;
@@ -28,6 +29,7 @@ public class ModBlocks {
     public static final SmelterBlock SMELTER = new SmelterBlock();
     public static final StorageBlock STORAGE = new StorageBlock();
     public static final TankFluidBlock TANK_FLUID = new TankFluidBlock();
+    public static final ChestBlock CHEST = new ChestBlock();
 
     public static final Fluid JUICE_FLUID = new Fluid(McModding.MOD_ID + ":juice");
     public static final Fluid STEAM_FLUID = new Fluid(McModding.MOD_ID + ":steam").setDensity(-1).setGaseous(true);
@@ -45,10 +47,12 @@ public class ModBlocks {
         GameRegistry.registerBlock(SMELTER, "smelter");
         GameRegistry.registerBlock(STORAGE, "storage");
         GameRegistry.registerBlock(TANK_FLUID, "tank_fluid");
+        GameRegistry.registerBlock(CHEST, "chest");
 
         GameRegistry.registerTileEntity(SmelterTile.class, McModding.MOD_ID + ":smelter");
         GameRegistry.registerTileEntity(StorageTile.class, McModding.MOD_ID + ":storage");
         GameRegistry.registerTileEntity(TankFluidTile.class, McModding.MOD_ID + ":tank_fluid");
+        GameRegistry.registerTileEntity(ChestTile.class, McModding.MOD_ID + ":chest");
 
         // Жидкость должна быть зарегистрирована раньше, чем блок для которой она будет прикреплена!
         if (FluidRegistry.registerFluid(JUICE_FLUID)) {
