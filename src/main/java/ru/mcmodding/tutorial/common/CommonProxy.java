@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,15 +20,18 @@ import ru.mcmodding.tutorial.McModding;
 import ru.mcmodding.tutorial.common.container.ChestContainer;
 import ru.mcmodding.tutorial.common.handler.*;
 import ru.mcmodding.tutorial.common.handler.packet.ServerMessagePacket;
-import ru.mcmodding.tutorial.common.tile.ChestTile;
 import ru.mcmodding.tutorial.common.handler.recipe.WhetstoneRecipe;
+import ru.mcmodding.tutorial.common.tile.ChestTile;
 
 public class CommonProxy implements IGuiHandler {
 
+    private static SimpleNetworkWrapper network;
     public static final int GUI_CHEST = 0;
 
     public void preInit(FMLPreInitializationEvent event) {
-        McModding.NETWORK.registerMessage(new ServerMessagePacket.Handler(), ServerMessagePacket.class, 0, Side.SERVER);
+        // SimpleNetworkWrapper
+        network = new SimpleNetworkWrapper(McModding.MOD_ID);
+        network.registerMessage(new ServerMessagePacket.Handler(), ServerMessagePacket.class, 0, Side.SERVER);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(McModding.instance, this);
 
@@ -56,6 +60,10 @@ public class CommonProxy implements IGuiHandler {
         GameRegistry.addSmelting(ModBlocks.RUBY_ORE, new ItemStack(ModItems.RUBY), 5F);
 
         GameRegistry.addRecipe(new WhetstoneRecipe());
+    }
+
+    public static SimpleNetworkWrapper getNetwork() {
+        return network;
     }
 
     @Override
