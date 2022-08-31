@@ -26,12 +26,17 @@ import ru.mcmodding.tutorial.common.tile.ChestTile;
 public class CommonProxy implements IGuiHandler {
 
     private static SimpleNetworkWrapper network;
+    private static PacketHandler packetHandler;
     public static final int GUI_CHEST = 0;
 
     public void preInit(FMLPreInitializationEvent event) {
         // SimpleNetworkWrapper
         network = new SimpleNetworkWrapper(McModding.MOD_ID);
         network.registerMessage(new ServerMessagePacket.Handler(), ServerMessagePacket.class, 0, Side.SERVER);
+
+        // FMLEventChannel как альтернатива SimpleNetworkWrapper
+        // Вам нет никакой необходимости использовать сразу оба варианта в вашем моде!
+        packetHandler = new PacketHandler();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(McModding.instance, this);
 
@@ -64,6 +69,10 @@ public class CommonProxy implements IGuiHandler {
 
     public static SimpleNetworkWrapper getNetwork() {
         return network;
+    }
+
+    public static PacketHandler getPacketHandler() {
+        return packetHandler;
     }
 
     @Override
