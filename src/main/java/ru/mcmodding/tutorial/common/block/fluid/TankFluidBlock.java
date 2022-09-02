@@ -33,15 +33,15 @@ public class TankFluidBlock extends BlockContainer {
         setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 1F, 0.875F);
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
         iconTop = register.registerIcon(McModding.MOD_ID + ":fluid_tank_top");
         iconSide = register.registerIcon(McModding.MOD_ID + ":fluid_tank_side");
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
+    @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         if (side == 0 || side == 1) return iconTop;
         return iconSide;

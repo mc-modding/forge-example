@@ -33,10 +33,10 @@ public class TankFluidTile extends TileEntity implements IFluidHandler {
         return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
+    @SideOnly(Side.CLIENT)
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        this.readExtendedData(packet.func_148857_g());
+        readExtendedData(packet.func_148857_g());
     }
 
     /**
