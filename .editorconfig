@@ -12,3 +12,5 @@ ij_continuation_indent_size = 8
 
 [*.java]
 ij_java_blank_lines_after_class_header = 1
+ij_java_doc_add_blank_line_after_description = true
+ij_any_space_after_type_cast = true

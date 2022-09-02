@@ -1,11 +1,15 @@
 package ru.mcmodding.tutorial.common.block.fluid;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -17,11 +21,40 @@ import ru.mcmodding.tutorial.common.item.tool.FluidCellItem;
 import ru.mcmodding.tutorial.common.tile.TankFluidTile;
 
 public class TankFluidBlock extends BlockContainer {
+
+    @SideOnly(Side.CLIENT)
+    IIcon iconTop, iconSide;
+
     public TankFluidBlock() {
-        super(Material.iron);
+        super(Material.glass);
         setBlockName("tank_fluid");
-        setBlockTextureName(McModding.MOD_ID + ":tank_fluid");
+        setHardness(0.5F);
         setCreativeTab(ModTab.INSTANCE);
+        setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 1F, 0.875F);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister register) {
+        iconTop = register.registerIcon(McModding.MOD_ID + ":fluid_tank_top");
+        iconSide = register.registerIcon(McModding.MOD_ID + ":fluid_tank_side");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta) {
+        if (side == 0 || side == 1) return iconTop;
+        return iconSide;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 
     @Override

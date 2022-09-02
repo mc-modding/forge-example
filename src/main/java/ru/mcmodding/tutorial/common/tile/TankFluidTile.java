@@ -1,5 +1,7 @@
 package ru.mcmodding.tutorial.common.tile;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -9,6 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 public class TankFluidTile extends TileEntity implements IFluidHandler {
+
     private final FluidTank fluidTank = new FluidTank(10_000);
 
     @Override
@@ -31,11 +34,9 @@ public class TankFluidTile extends TileEntity implements IFluidHandler {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-        TileEntity tile = worldObj.getTileEntity(packet.func_148856_c(), packet.func_148855_d(), packet.func_148854_e());
-        if (tile instanceof TankFluidTile) {
-            ((TankFluidTile) tile).readExtendedData(packet.func_148857_g());
-        }
+        readExtendedData(packet.func_148857_g());
     }
 
     /**
@@ -135,6 +136,10 @@ public class TankFluidTile extends TileEntity implements IFluidHandler {
      */
     public int getCapacity() {
         return fluidTank.getCapacity();
+    }
+
+    public FluidStack getFluid() {
+        return fluidTank.getFluid();
     }
 
     private void writeExtendedData(NBTTagCompound nbt) {
