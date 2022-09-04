@@ -75,3 +75,8 @@ tile.mcmodding.chest.name=Сундук
 
 # Messages
 mcmodding.message.hello=Привет от %s!
+
+# Keyboard
+mcmodding.key.category=Клавиши McModding
+mcmodding.key.sendPacket1=Отправить пакет #1
+mcmodding.key.sendPacket2=Отправить пакет #2
