@@ -25,11 +25,9 @@ public class ClientProxy extends CommonProxy {
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
 
-        switch (id) {
-            case GUI_CHEST:
-                return new ChestGui(new ChestContainer((ChestTile)tile, player.inventory));
-            default:
-                return null;
+        if (id == GUI_CHEST) {
+            return new ChestGui(new ChestContainer((ChestTile) tile, player.inventory));
         }
+        return null;
     }
 }
