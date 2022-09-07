@@ -4,11 +4,13 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ClientCommandHandler;
 import ru.mcmodding.tutorial.client.gui.ChestGui;
 import ru.mcmodding.tutorial.common.CommonProxy;
 import ru.mcmodding.tutorial.common.container.ChestContainer;
 import ru.mcmodding.tutorial.common.handler.ModBlocks;
 import ru.mcmodding.tutorial.common.handler.ModItems;
+import ru.mcmodding.tutorial.common.handler.command.CommandWhatIsIt;
 import ru.mcmodding.tutorial.common.tile.ChestTile;
 
 public class ClientProxy extends CommonProxy {
@@ -19,6 +21,8 @@ public class ClientProxy extends CommonProxy {
 
         ModItems.registerRender();
         ModBlocks.registerRender();
+
+        ClientCommandHandler.instance.registerCommand(new CommandWhatIsIt());
     }
 
     @Override
