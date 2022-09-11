@@ -22,12 +22,11 @@ public class CommandPing extends CommandBase {
     }
 
     /**
-     * Определяет требуемый уровень доступа для использования этой команды.
-     * @return Значение уровня доступа [0-4]
+     * Проверяет возможность использования команды указанным отправителем
      */
     @Override
-    public int getRequiredPermissionLevel() {
-        return 0;
+    public boolean canCommandSenderUseCommand(ICommandSender sender) {
+        return true; // Команда не опасная - можно всем (:
     }
 
     /**
