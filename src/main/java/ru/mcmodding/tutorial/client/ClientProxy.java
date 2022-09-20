@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ClientCommandHandler;
 import ru.mcmodding.tutorial.client.gui.ChestGui;
+import ru.mcmodding.tutorial.client.handler.KeyHandler;
 import ru.mcmodding.tutorial.common.CommonProxy;
 import ru.mcmodding.tutorial.common.container.ChestContainer;
 import ru.mcmodding.tutorial.common.handler.ModBlocks;
@@ -23,6 +24,9 @@ public class ClientProxy extends CommonProxy {
         ModBlocks.registerRender();
 
         ClientCommandHandler.instance.registerCommand(new CommandWhatIsIt());
+
+        KeyHandler keyHandler = new KeyHandler();
+        keyHandler.register();
     }
 
     @Override

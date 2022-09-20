@@ -75,3 +75,8 @@ tile.mcmodding.chest.name=Chest
 
 # Messages
 mcmodding.message.hello=Hello from %s!
+
+# Keyboard
+mcmodding.key.category=McModding Keys
+mcmodding.key.sendPacket1=Send packet #1
+mcmodding.key.sendPacket2=Send packet #2
