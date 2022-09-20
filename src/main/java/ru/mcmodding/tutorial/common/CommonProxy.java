@@ -16,6 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import ru.mcmodding.tutorial.McModding;
 import ru.mcmodding.tutorial.common.container.ChestContainer;
 import ru.mcmodding.tutorial.common.handler.*;
@@ -66,6 +69,13 @@ public class CommonProxy implements IGuiHandler {
         GameRegistry.addSmelting(ModBlocks.RUBY_ORE, new ItemStack(ModItems.RUBY), 5F);
 
         GameRegistry.addRecipe(new WhetstoneRecipe());
+
+        OreDictionary.registerOre("blockRuby", ModBlocks.RUBY);
+        OreDictionary.registerOre("gemRuby", ModItems.RUBY);
+        OreDictionary.registerOre("balloon", new ItemStack(ModItems.BALLOON, 1, OreDictionary.WILDCARD_VALUE));
+
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.RUBY_SWORD), " R ", " R ", " S ", 'R', "gemRuby", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.RING), "gemRuby", "ingotGold"));
     }
 
     public static SimpleNetworkWrapper getNetwork() {
