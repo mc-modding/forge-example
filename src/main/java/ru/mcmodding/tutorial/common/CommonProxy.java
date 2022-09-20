@@ -25,6 +25,7 @@ public class CommonProxy {
 
         ModBlocks.register();
         ModItems.register();
+        ModEnchantments.register();
 
         GameRegistry.registerFuelHandler(new FuelHandler());
 

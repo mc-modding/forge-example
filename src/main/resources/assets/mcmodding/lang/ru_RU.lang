@@ -42,6 +42,8 @@ item.anti_enchant_whetstone.name=Точильный камень: Анти-ча�
 
 entity.mcmodding.goose.name=Гусь
 
+enchantment.poison_blade=Отравленный клинок
+
 tile.colored_stone.black.name=Чёрный камень
 tile.colored_stone.red.name=Красный камень
 tile.colored_stone.green.name=Зелёный камень
