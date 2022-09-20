@@ -45,6 +45,7 @@ public class CommonProxy implements IGuiHandler {
 
         ModBlocks.register();
         ModItems.register();
+        ModEnchantments.register();
 
         GameRegistry.registerFuelHandler(new FuelHandler());
 

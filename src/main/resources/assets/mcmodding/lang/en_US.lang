@@ -42,6 +42,9 @@ item.anti_enchant_whetstone.name=Whetstone: Anti-enchantment
 
 entity.mcmodding.goose.name=Goose
 
+enchantment.poison_blade=Poison blade
+enchantment.melting=Melting
+
 tile.colored_stone.black.name=Black stone
 tile.colored_stone.red.name=Red stone
 tile.colored_stone.green.name=Green stone
