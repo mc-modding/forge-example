@@ -10,6 +10,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import ru.mcmodding.tutorial.McModding;
 import ru.mcmodding.tutorial.common.handler.*;
 import ru.mcmodding.tutorial.common.handler.packet.ServerMessagePacket;
@@ -45,5 +48,12 @@ public class CommonProxy {
         GameRegistry.addSmelting(ModBlocks.RUBY_ORE, new ItemStack(ModItems.RUBY), 5F);
 
         GameRegistry.addRecipe(new WhetstoneRecipe());
+
+        OreDictionary.registerOre("blockRuby", ModBlocks.RUBY);
+        OreDictionary.registerOre("gemRuby", ModItems.RUBY);
+        OreDictionary.registerOre("balloon", new ItemStack(ModItems.BALLOON, 1, OreDictionary.WILDCARD_VALUE));
+
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.RUBY_SWORD), " R ", " R ", " S ", 'R', "gemRuby", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.RING), "gemRuby", "ingotGold"));
     }
 }
