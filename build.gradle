@@ -3,23 +3,26 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
-            name = "forge"
-            url = "https://maven.minecraftforge.net/"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+            name = "github"
+            url = "https://github.com/juanmuscaria/maven/raw/master"
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:[1.2-1.4.6-SNAPSHOT,)'
     }
 }
 
-apply plugin: 'idea'
+repositories {
+    flatDir {
+        dirs 'deps'
+    }
+}
+
+apply plugin: 'java'
 apply plugin: 'forge'
 
-targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 /* Вспомогательные конфиги для IDEA */
 idea {
