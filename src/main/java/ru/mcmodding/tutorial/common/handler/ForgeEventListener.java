@@ -16,6 +16,8 @@ import java.util.List;
 public class ForgeEventListener {
     @SubscribeEvent
     public void onHarvest(BlockEvent.HarvestDropsEvent event) {
+        if (event.harvester == null) return;
+
         ItemStack inHand = event.harvester.getHeldItem();
         if (inHand == null || EnchantmentHelper.getEnchantmentLevel(ModEnchantments.melting.effectId, inHand) <= 0) {
             return;
