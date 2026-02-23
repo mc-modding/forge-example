@@ -1,14 +1,25 @@
 buildscript {
     /* Репозитории Gradle-плагинов */
     repositories {
+        gradlePluginPortal()
         mavenCentral()
         maven {
+            name = "forge"
+            url = uri("https://maven.minecraftforge.net")
+        }
+        maven {
+            name = "jitpack"
+            url = uri("https://jitpack.io")
+        }
+        maven {
             name = "github"
-            url = "https://github.com/juanmuscaria/maven/raw/master"
+            url = uri("https://github.com/juanmuscaria/maven/raw/master")
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:[1.2-1.4.6-SNAPSHOT,)'
+        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') {
+           changing = true
+       }
     }
 }
 
@@ -18,11 +29,18 @@ repositories {
     }
 }
 
+apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'forge'
 
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 /* Вспомогательные конфиги для IDEA */
 idea {
@@ -34,13 +52,12 @@ idea {
 
 minecraft {
     version = '1.7.10-10.13.4.1614-1.7.10' // Версия Forge
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    //mappings = "stable_12" // Версия маппингов Minecraft для подготовки среды разработки
 }
 
 processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
@@ -55,9 +72,9 @@ processResources {
 }
 
 /* Dev версия мода без обфускации MC */
-task devJar(type: Jar) {
-    classifier = 'dev'
-    manifest = jar.manifest
+tasks.register('devJar', Jar) {
+    archiveClassifier.set('dev')
+    manifest.from(jar.manifest)
     from sourceSets.main.output
 }
 
