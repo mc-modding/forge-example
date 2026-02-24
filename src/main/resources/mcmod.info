@@ -1,0 +1,7 @@
+[{
+  "modid": "mcmodding",
+  "name": "McModding Mod",
+  "description": "Описание нашего мода",
+  "version": "${version}",
+  "mcversion": "${mcversion}"
+}]
