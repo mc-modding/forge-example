@@ -40,6 +40,7 @@ public class CommonProxy implements IGuiHandler {
         MinecraftForge.EVENT_BUS.register(new ForgeEventListener());
 
         ModBlocks.register();
+        ModEntities.register();
         ModItems.register();
         ModEnchantments.register();
 
@@ -69,12 +70,10 @@ public class CommonProxy implements IGuiHandler {
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
 
-        switch (id) {
-            case GUI_CHEST:
-                return new ChestContainer((ChestTile)tile, player.inventory);
-            default:
-                return null;
+        if (id == GUI_CHEST) {
+            return new ChestContainer((ChestTile) tile, player.inventory);
         }
+        return null;
     }
 
     @Override
